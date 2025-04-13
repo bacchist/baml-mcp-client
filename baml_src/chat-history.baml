@@ -7,10 +7,6 @@ class ChatResponse {
   content string
 }
 
-class MCPServer {
-  path string
-}
-
 class MCPTool {
   name string
   description string
@@ -19,7 +15,7 @@ class MCPTool {
 
 class ToolCall {
   name string
-  args string
+  args string @description("The arguments to pass to the tool. Must be a valid JSON object.")
 }
 
 function ChatWithLLM(messages: ChatMessage[], available_tools: MCPTool[]) -> ChatResponse | ToolCall {

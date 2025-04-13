@@ -1,4 +1,5 @@
 import asyncio
+import json
 from typing import Optional
 from contextlib import AsyncExitStack
 
@@ -72,17 +73,17 @@ class MCPClient:
         if isinstance(response, ToolCall):
             print(f"Response is a ToolCall: {response.name}")
             tool_name = response.name
-            tool_args = response.args
+            tool_args = json.loads(response.args)
             
             # Execute tool call
-            result = await self.session.call_tool(tool_name, json.loads(tool_args))
+            result = await self.session.call_tool(tool_name, tool_args)
             tool_results.append({"call": tool_name, "result": result})
             final_text.append(f"[Calling tool {tool_name} with args {tool_args}]")
 
             # Continue conversation with tool results
             messages.append(ChatMessage(
                 role="assistant",
-                content=f"I'm using the tool {tool_name}"
+                content=f"The tool {tool_name} returned: {result}"
             ))
 
             # Get next response from BAML

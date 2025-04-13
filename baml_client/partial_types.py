@@ -42,9 +42,6 @@ class ChatMessage(BaseModel):
 class ChatResponse(BaseModel):
     content: Optional[str] = None
 
-class MCPServer(BaseModel):
-    path: Optional[str] = None
-
 class MCPTool(BaseModel):
     name: Optional[str] = None
     description: Optional[str] = None

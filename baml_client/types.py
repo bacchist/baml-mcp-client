@@ -47,9 +47,6 @@ class ChatMessage(BaseModel):
 class ChatResponse(BaseModel):
     content: str
 
-class MCPServer(BaseModel):
-    path: str
-
 class MCPTool(BaseModel):
     name: str
     description: str
